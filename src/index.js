@@ -20,25 +20,25 @@ root.render(
   <>  
   {/* <h2 className='text-center'>Peticiones Ajax con clases</h2>
     <PeticionesAjaxClases /> 
-  <br /> 
+  <br />  */}
 
-  <h2 className='text-center'>Peticiones Ajax con hooks y funciones</h2>  
+  {/* <h2 className='text-center'>Peticiones Ajax con hooks y funciones</h2>  
   <PeticionAjaxFunciones /> 
-  <br />  
+  <br />   */}
 
-  <h2 className='text-center'>Custome Hooks</h2> 
+  {/* <h2 className='text-center'>Custome Hooks</h2> 
   <Peticion />  *
-  <br /> 
+  <br />  */}
 
-  <h2 className='text-center'> uso de referencias</h2>
+  {/* <h2 className='text-center'> uso de referencias</h2>
   <UsoRef />
-  <br />  
+  <br />   */}
 
-  <h2 className='text-center'> usode formularios en react</h2>  
+  {/* <h2 className='text-center'> usode formularios en react</h2>  
   <div className='container'>  
   <Formularios /> 
   </div> 
-  <br /> 
+  <br />  */}
 
   <h2 className='text-center'> uso de formularios controlados con una sola variable de estado</h2> 
   <div className='container'> 
@@ -46,13 +46,13 @@ root.render(
   </div>
   <br /> 
 
-  <h2 className='text-center'> validacion formularios </h2> 
+  {/* <h2 className='text-center'> validacion formularios </h2> 
   <div className='container'> 
   <ValidacionFormXD />
   </div>     */}
 
-   <h2>Rutas xD</h2> 
-  <RutasXD /> 
+   {/* <h2>Rutas xD</h2> 
+  <RutasXD />  */}
   </> 
 );
 

@@ -3,34 +3,40 @@ import React,{useState} from "react";
 // _________________custom Hook para el funcionamiento del form______________________
 
 function useForm (initialState, validateForm) {
-    const[form, setForm] = useState(initialState); 
-    const[error, setError] = useState({}); 
+    const[Inputs, setForm] = useState(initialState); 
+    const[error, setError] = useState({
+        errorInitial: true
+    }); 
 
     const handleChange = (e) =>{  
         const{name, value} = e.target; 
         setForm({ 
-            ...form,   
+            ...Inputs,   
             [name]: value
 
         });  
-        console.log(form); 
     }  
     const handleBlur = (e) =>{ 
         handleChange(e);  
-        setError(validateForm(form));
+        setError(validateForm(Inputs));
     } 
 
-    const handleSubmit = (e) => { 
+    const handleSubmit = async (e) => { 
         e.preventDefault();  
-        setError(validateForm(form)); 
+        setError( validateForm(Inputs)); 
+        
         if(Object.keys(error).length === 0){ 
-           alert("se ha enviado el formulario")
-        } 
+           alert("se ha enviado el formulario"); 
+           console.log(error); 
+        } else{ 
+            alert("lo sentimos ha ocurrido un error"); 
+            console.log(error); 
+        }
         // si el objeto de errores viene bacio entonces podemos enviar el formulario 
     } 
 
     return { 
-        form, 
+        Inputs, 
         error, 
         handleChange, 
         handleBlur, 
@@ -47,40 +53,40 @@ export default function ValidacionFormXD(){
         asunto: "", 
         comentarios: "", 
     }
-    const validateForm = (form) =>{ 
+    const validateForm = (Inputs) =>{ 
         let errores = {};  
         let RegexNombre = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/; 
         let RegexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/; 
         let RegexComments = /^.{1,255}$/; 
 
 
-        if(!form.name.trim()){ 
+        if(!Inputs.name.trim()){ 
             errores.name = "el campo nombre es solicitado"; 
-        }else if(!RegexNombre.test(form.name.trim())){ 
+        }else if(!RegexNombre.test(Inputs.name.trim())){ 
             errores.name = "solo puedes escribir letras y espacios"; 
         }   
 
         // si el input viene vacio entonces se cumple la primera condicion por lo cual se ingresa un valor al objeto de errores, pero si se cumple la segunda condicion que es que el contenido del imput no coincida con la expresion regualar entonces, se genera el segundo error, siempre y cuando haya un error en el objeto no se podra enviar el formulario. 
 
-        if(!form.email.trim()){ 
+        if(!Inputs.email.trim()){ 
             errores.email = "el campo email es solicitado"; 
-        }else if (!RegexEmail.test(form.email.trim())){ 
+        }else if (!RegexEmail.test(Inputs.email.trim())){ 
             errores.email = "escribe un email que sea valido"; 
         } 
 
-        if(!form.asunto.trim()){ 
+        if(!Inputs.asunto.trim()){ 
             errores.asunto = "el campo asunto es requerido"; 
         } 
 
-        if(!form.comentarios.trim()){ 
+        if(!Inputs.comentarios.trim()){ 
             errores.comentarios = "el campo comentarios es requerido"; 
-        }else if (!RegexComments.test(form.comentarios.trim())){ 
+        }else if (!RegexComments.test(Inputs.comentarios.trim())){ 
             errores.comentarios = "no puedes ingresar mas de 255 caracteres"; 
         }
 
         return errores; 
     }
-    const {form, error, handleChange, handleBlur, handleSubmit} = useForm(initialState, validateForm); 
+    const {Inputs, error, handleChange, handleBlur, handleSubmit} = useForm(initialState, validateForm); 
     return( 
         <>  
         <form onSubmit={handleSubmit}>
@@ -91,7 +97,7 @@ export default function ValidacionFormXD(){
                  type="text" 
                  id="nombre" 
                  name="name"  
-                 value={form.name}
+                 value={Inputs.name}
                  onChange={handleChange} 
                  onBlur={handleBlur} />
             </div>  
@@ -107,7 +113,7 @@ export default function ValidacionFormXD(){
                  type="text" 
                  id="correo" 
                  name="email" 
-                 value={form.email} 
+                 value={Inputs.email} 
                  onChange={handleChange} 
                  onBlur={handleBlur} />
             </div>  
@@ -123,7 +129,7 @@ export default function ValidacionFormXD(){
                  type="text" 
                  id="asunto" 
                  name="asunto" 
-                 value={form.asunto} 
+                 value={Inputs.asunto} 
                  onChange={handleChange} 
                  onBlur={handleBlur}
                  />
@@ -138,7 +144,7 @@ export default function ValidacionFormXD(){
                  type="text"   
                  id="coments" 
                  name="comentarios" 
-                 value={form.value}
+                 value={Inputs.value}
                  style={{resize: "nobne"}} 
                  onChange={handleChange} 
                  onBlur={handleBlur}

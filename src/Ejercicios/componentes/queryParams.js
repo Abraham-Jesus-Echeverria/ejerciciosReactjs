@@ -1,7 +1,7 @@
 import React from "react"; 
 import { useLocation, useHistory } from "react-router-dom"; 
 
-// http://localhost:3000/queryParams?value1=hola&value2=10&value3=comoestasXD
+// http://localhost:3000/queryParams?value1=0&value2=15
 export default function QueryParamsXD(){ 
     const location = useLocation();   
     const history = useHistory(); 
